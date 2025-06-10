@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GamerTech Solutions LLC - Global VR Procurement & Export Solutions</title>
+    <meta name="description" content="Leading global provider of VR procurement and export solutions serving enterprise clients across 50+ countries">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            padding: 0.5rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #0080ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #00ffff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+                url('https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff, #00ffff, #0080ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
+            margin: 0 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 255, 255, 0.5);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid #00ffff;
+            color: #00ffff;
+        }
+
+        .cta-secondary:hover {
+            background: #00ffff;
+            color: #0a0a0a;
+        }
+
+        /* Animations */
+        @keyframes glow {
+            0% { text-shadow: 0 0 20px rgba(0, 255, 255, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-10px) translateX(-50%); }
+            60% { transform: translateY(-5px) translateX(-50%); }
+        }
+
+        /* Section styling */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #ffffff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .about-text h3 {
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .about-image {
+            position: relative;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+                url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80') center/cover;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #00ffff;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Service cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 128, 255, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 255, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .service-description {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            min-height: 300px;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.03);
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 128, 255, 0.1));
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(0, 255, 255, 0.6);
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .portfolio-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #00ffff;
+        }
+
+        .portfolio-description {
+            opacity: 0.8;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .portfolio-meta {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: rgba(0, 255, 255, 0.7);
+        }
+
+        /* Contact form */
+        .contact-section {
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+                url('https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+            background-attachment: fixed;
+            padding: 5rem 2rem;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            color: white;
+        }
+
+        .contact-info h3 {
+            color: #00ffff;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #00ffff;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 10, 0.9);
+            padding: 3rem 2rem 1rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: #00ffff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Team section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(0, 128, 255, 0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(0, 255, 255, 0.8);
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .team-description {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        /* Page sections */
+        .page-section {
+            min-height: 100vh;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-button {
+                display: block;
+                margin: 1rem 0;
+                text-align: center;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-top: 3px solid #00ffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Certification badges */
+        .certifications {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .cert-badge {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #00ffff;
+            transition: all 0.3s ease;
+        }
+
+        .cert-badge:hover {
+            border-color: rgba(0, 255, 255, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading animation -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">GamerTech Solutions</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="showPage('home')">Home</a></li>
+                <li><a href="#about" onclick="showPage('about')">About</a></li>
+                <li><a href="#services" onclick="showPage('services')">Services</a></li>
+                <li><a href="#portfolio" onclick="showPage('portfolio')">Portfolio</a></li>
+                <li><a href="#contact" onclick="showPage('contact')">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page-section active">
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Custom VR Solutions & Technology Innovation</h1>
+                <p class="hero-subtitle">Tailored VR applications for training, simulation, and enterprise visualization. From concept development to deployment with ongoing technical support.</p>
+                <div style="margin-top: 2rem;">
+                    <a href="#services" class="cta-button" onclick="showPage('services')">Explore Services</a>
+                    <a href="#contact" class="cta-button cta-secondary" onclick="showPage('contact')">Request Quote</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div style="font-size: 1.5rem;">↓</div>
+                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Scroll down</div>
+            </div>
+        </section>
+
+        <!-- Company Stats -->
+        <section class="section">
+            <h2 class="section-title">Why Choose GamerTech Solutions</h2>
+            <div class="about-stats">
+                <div class="stat-card">
+                    <span class="stat-number">$50M+</span>
+                    <div class="stat-label">Annual Revenue</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">850+</span>
+                    <div class="stat-label">Projects Delivered</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">50+</span>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">99.2%</span>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Services Preview -->
+        <section class="section">
+            <h2 class="section-title">Enterprise VR Solutions</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1617802690992-15d93263d3a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; height: 200px; border-radius: 15px; margin-bottom: 1.5rem;"></div>
+                    <h3 class="service-title">Enterprise VR Procurement</h3>
+                    <p class="service-description">Strategic sourcing and procurement of VR hardware from leading manufacturers including Meta, HTC, Pico, and Varjo. Volume pricing with up to 35% cost savings for enterprise clients.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80') center/cover; height: 200px; border-radius: 15px; margin-bottom: 1.5rem;"></div>
+                    <h3 class="service-title">Global Export Services</h3>
+                    <p class="service-description">Comprehensive international trade solutions with established networks in North America, Europe, and Asia-Pacific. Full customs clearance and logistics management.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2056&q=80') center/cover; height: 200px; border-radius: 15px; margin-bottom: 1.5rem;"></div>
+                    <h3 class="service-title">Custom VR Solutions</h3>
+                    <p class="service-description">Tailored VR applications for training, simulation, and enterprise visualization. From concept development to deployment with ongoing technical support.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="section">
+            <h2 class="section-title">Industry Certifications & Partnerships</h2>
+            <div class="certifications">
+                <div class="cert-badge">ISO 9001:2015 Certified</div>
+                <div class="cert-badge">Meta Business Partner</div>
+                <div class="cert-badge">HTC VIVE Authorized Distributor</div>
+                <div class="cert-badge">Export License: EAR99</div>
+                <div class="cert-badge">SOC 2 Type II Compliant</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page-section">
+        <section class="section" style="padding-top: 8rem;">
+            <h2 class="section-title">About GamerTech Solutions LLC</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3>Company Overview</h3>
+                    <p>Founded in 2018 and headquartered in Louisville, Kentucky, GamerTech Solutions LLC has established itself as a premier provider of VR procurement and export solutions. We serve enterprise clients ranging from Fortune 500 companies to innovative startups across manufacturing, healthcare, education, and real estate sectors.</p>
+                    
+                    <h3 style="margin-top: 2rem;">Our Mission</h3>
+                    <p>To democratize access to cutting-edge VR technology through strategic procurement, seamless global distribution, and comprehensive technical support. We bridge the gap between innovative VR manufacturers and enterprises seeking to implement transformative virtual reality solutions.</p>
+                </div>
+                <div class="about-image"></div>
+            </div>
+
+            <div class="about-text" style="margin: 3rem 0;">
+                <h3>Business Operations</h3>
+                <p>• <strong>Global Supply Chain</strong>: Direct partnerships with 15+ VR manufacturers and suppliers<br>
+                • <strong>Distribution Network</strong>: Established presence in 50+ countries with local partners<br>
+                • <strong>Technical Expertise</strong>: Certified engineers and VR specialists on staff<br>
+                • <strong>Financial Strength</strong>: $50M+ annual revenue with strong credit rating<br>
+                • <strong>Compliance</strong>: Full regulatory compliance across all operating jurisdictions</p>
+
+                <h3 style="margin-top: 2rem;">Market Position</h3>
+                <p>As the VR market experiences unprecedented growth—projected to reach $87.2B by 2030—GamerTech Solutions maintains a leadership position through strategic partnerships, operational excellence, and deep industry expertise. Our clients benefit from early access to emerging technologies and competitive pricing through our established supply relationships.</p>
+            </div>
+
+            <!-- Leadership Team -->
+            <div style="background: rgba(0, 0, 0, 0.3); padding: 3rem 0; margin: 2rem 0; border-radius: 20px;">
+                <h3 style="text-align: center; color: #00ffff; font-size: 2rem; margin-bottom: 2rem;">Executive Leadership</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-avatar" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; color: transparent;">
+                        </div>
+                        <div class="team-name">David Chen</div>
+                        <div class="team-role">Chief Executive Officer</div>
+                        <div class="team-description">Former VP of Strategic Partnerships at Meta Reality Labs. 15+ years in VR/AR industry with extensive experience in global business development and technology commercialization.</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2088&q=80') center/cover; color: transparent;">
+                        </div>
+                        <div class="team-name">Sarah Johnson</div>
+                        <div class="team-role">Chief Technology Officer</div>
+                        <div class="team-description">Ex-Senior Engineer at HTC VIVE with deep expertise in VR hardware architecture and system integration. Holds 12 patents in immersive technology.</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; color: transparent;">
+                        </div>
+                        <div class="team-name">Michael Zhang</div>
+                        <div class="team-role">VP of Global Operations</div>
+                        <div class="team-description">International trade specialist with 20+ years managing complex supply chains. Previously led operations for tier-1 technology distributors in Asia-Pacific region.</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2088&q=80') center/cover; color: transparent;">
+                        </div>
+                        <div class="team-name">Lisa Wang</div>
+                        <div class="team-role">Chief Financial Officer</div>
+                        <div class="team-description">CPA with extensive experience in technology sector finance. Former finance director at Fortune 500 technology companies with expertise in international commerce.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-stats">
+                <div class="stat-card">
+                    <span class="stat-number">6</span>
+                    <div class="stat-label">Years in Operation</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">125</span>
+                    <div class="stat-label">Full-time Employees</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">18</span>
+                    <div class="stat-label">Industry Verticals</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">98.5%</span>
+                    <div class="stat-label">On-time Delivery</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services Page -->
+    <div id="services" class="page-section">
+        <section class="section" style="padding-top: 8rem;">
+            <h2 class="section-title">Professional Services Portfolio</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; height: 200px; border-radius: 15px; margin-bottom: 1.5rem;"></div>
+                    <h3 class="service-title">VR Hardware Procurement</h3>
+                    <p class="service-description">
+                        <strong>Strategic Sourcing Solutions:</strong><br>
+                        • Direct partnerships with Meta, HTC, Pico, Varjo, and 15+ manufacturers<br>
+                        • Volume pricing negotiations achieving 20-35% cost savings<br>
+                        • Technical specification analysis and vendor selection<br>
+                        • Quality assurance and incoming inspection services<br>
+                        • Supply chain risk management and inventory optimization<br><br>
+                        <strong>Product Portfolio:</strong> Professional VR headsets, tracking systems, haptic controllers, enterprise software licenses, and complete immersive solutions.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; height: 200px; border-radius: 15px; margin-bottom: 1.5rem;"></div>
+                    <h3 class="service-title">International Export Services</h3>
+                    <p class="service-description">
+                        <strong>Global Trade Solutions:</strong><br>
+                        • Export documentation and compliance management<br>
+                        • Customs clearance in 50+ countries<br>
+                        • International shipping and logistics coordination<br>
+                        • Trade finance and letter of credit services<br>
+                        • Regulatory compliance across all jurisdictions<br><br>
+                        <strong>Service Coverage:</strong> North America, Europe, Asia-Pacific, with established distribution partners and local support teams ensuring seamless delivery.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2012&q=80') center/cover; height: 200px; border-radius: 15px; margin-bottom: 1.5rem;"></div>
+                    <h3 class="service-title">Custom VR Development</h3>
+                    <p class="service-description">
+                        <strong>Enterprise Application Development:</strong><br>
+                        • Industrial training and safety simulation systems<br>
+                        • Product visualization and marketing applications<br>
+                        • Healthcare therapy and rehabilitation programs<br>
+                        • Educational content and virtual classrooms<br>
+                        • Real estate and architectural visualization<br><br>
+                        <strong>Technical Capabilities:</strong> Unity 3D/Unreal Engine development, cloud deployment, multi-platform compatibility, analytics integration, and white-label solutions.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80') center/cover; height: 200px; border-radius: 15px; margin-bottom: 1.5rem;"></div>
+                    <h3 class="service-title">Technical Support & Maintenance</h3>
+                    <p class="service-description">
+                        <strong>Comprehensive Support Services:</strong><br>
+                        • 24/7 technical support with 15-minute response SLA<br>
+                        • Remote diagnostics and troubleshooting<br>
+                        • On-site technical services and training<br>
+                        • Preventive maintenance and system optimization<br>
+                        • Hardware warranty management and RMA processing<br><br>
+                        <strong>Service Level Commitments:</strong> 99.5% uptime guarantee, dedicated account management, and proactive monitoring for enterprise clients.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; height: 200px; border-radius: 15px; margin-bottom: 1.5rem;"></div>
+                    <h3 class="service-title">Strategic Consulting</h3>
+                    <p class="service-description">
+                        <strong>Business Advisory Services:</strong><br>
+                        • VR implementation strategy and roadmap development<br>
+                        • ROI analysis and business case development<br>
+                        • Technology assessment and vendor evaluation<br>
+                        • Market research and competitive analysis<br>
+                        • Digital transformation planning<br><br>
+                        <strong>Expertise Areas:</strong> Industry best practices, emerging technology trends, cost-benefit analysis, and change management for VR adoption across enterprise environments.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; height: 200px; border-radius: 15px; margin-bottom: 1.5rem;"></div>
+                    <h3 class="service-title">R&D and Innovation</h3>
+                    <p class="service-description">
+                        <strong>Technology Innovation Lab:</strong><br>
+                        • Next-generation VR/AR technology research<br>
+                        • AI integration and machine learning applications<br>
+                        • 5G-enabled cloud VR solutions<br>
+                        • Mixed reality and spatial computing<br>
+                        • Prototype development and proof-of-concept<br><br>
+                        <strong>Innovation Partnerships:</strong> Collaboration with leading universities, technology incubators, and research institutions to advance VR technology frontiers.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Portfolio Page -->
+    <div id="portfolio" class="page-section">
+        <section class="section" style="padding-top: 8rem;">
+            <h2 class="section-title">Client Success Stories</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Global Manufacturing VR Training System</h3>
+                        <p class="portfolio-description">Deployed comprehensive VR safety training platform for Fortune 100 manufacturing client across 28 facilities in 12 countries. System reduced workplace accidents by 67% and improved training efficiency by 85%.</p>
+                        <div class="portfolio-meta">Client: Confidential Manufacturing Corporation | Timeline: 18 months | Investment: $2.8M</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2031&q=80') center/cover;">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Medical VR Rehabilitation Platform</h3>
+                        <p class="portfolio-description">Developed and deployed VR-based rehabilitation system for leading healthcare network. Platform serves 15,000+ patients annually with 58% improvement in therapy outcomes and 40% reduction in treatment time.</p>
+                        <div class="portfolio-meta">Client: Regional Healthcare System | Timeline: 12 months | Investment: $1.2M</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80') center/cover;">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">University VR Learning Labs</h3>
+                        <p class="portfolio-description">Established VR learning laboratories for tier-1 research university serving 5,000+ students across engineering, medicine, and architecture programs. Platform increased student engagement by 90%.</p>
+                        <div class="portfolio-meta">Client: Major Research University | Timeline: 8 months | Investment: $850K</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80') center/cover;">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Real Estate VR Showcase Platform</h3>
+                        <p class="portfolio-description">Built virtual property showcase platform for premium real estate developer. Solution increased qualified leads by 45% and reduced time-to-sale by 30% across luxury property portfolio.</p>
+                        <div class="portfolio-meta">Client: Luxury Real Estate Developer | Timeline: 6 months | Investment: $425K</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Automotive VR Design Center</h3>
+                        <p class="portfolio-description">Implemented immersive design review platform for automotive OEM enabling collaborative design validation. Reduced prototype costs by $3.2M annually and accelerated design cycles by 25%.</p>
+                        <div class="portfolio-meta">Client: Global Automotive Manufacturer | Timeline: 14 months | Investment: $1.8M</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80') center/cover;">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Aviation VR Training Simulator</h3>
+                        <p class="portfolio-description">Delivered comprehensive flight training VR system for major airline reducing training costs by 55% while improving safety scores. System now trains 200+ pilots annually across multiple aircraft types.</p>
+                        <div class="portfolio-meta">Client: International Airline | Timeline: 16 months | Investment: $2.1M</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page-section">
+        <section class="section contact-section" style="padding-top: 8rem;">
+            <h2 class="section-title">Contact GamerTech Solutions</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p style="margin-bottom: 2rem;">Ready to transform your business with cutting-edge VR solutions? Our team of experts is standing by to discuss your requirements and provide customized recommendations.</p>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <strong>Email</strong><br>
+                            info@gamertech.uk<br>
+                            enterprise@gamertech.uk
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <strong>Phone</strong><br>
+                            +1 (863) 333-5888<br>
+                            Toll-free: 1-800-GAMETECH
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <strong>Headquarters</strong><br>
+                            3300 Altabrook Dr, Unit 3103<br>
+                            Louisville, KY 40245<br>
+                            United States
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <strong>Business Hours</strong><br>
+                            Monday to Friday<br>
+                            9:00 AM - 7:30 PM EST
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3 style="color: #00ffff; margin-bottom: 2rem;">Request Enterprise Consultation</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Business Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your business email">
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company Name *</label>
+                            <input type="text" id="company" name="company" required placeholder="Enter your company name">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Job Title</label>
+                            <input type="text" id="title" name="title" placeholder="Enter your job title">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interest</label>
+                            <select id="service" name="service">
+                                <option value="">Select service type</option>
+                                <option value="procurement">VR Hardware Procurement</option>
+                                <option value="export">Export Services</option>
+                                <option value="custom">Custom Development</option>
+                                <option value="support">Technical Support</option>
+                                <option value="consulting">Strategic Consulting</option>
+                                <option value="enterprise">Enterprise Partnership</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Project Budget Range</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select budget range</option>
+                                <option value="50k-100k">$50K - $100K</option>
+                                <option value="100k-500k">$100K - $500K</option>
+                                <option value="500k-1m">$500K - $1M</option>
+                                <option value="1m+">$1M+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Requirements *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Please describe your project requirements, timeline, and specific VR technology needs"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Consultation Request</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>GamerTech Solutions LLC</h4>
+                <p>Leading global provider of VR procurement and export solutions. We partner with Fortune 500 companies and innovative enterprises to deliver cutting-edge virtual reality technology solutions that drive business transformation.</p>
+                <div style="margin-top: 1.5rem;">
+                    <p><strong>DUNS Number:</strong> 847-293-651</p>
+                    <p><strong>Tax ID:</strong> 87-4326195</p>
+                    <p><strong>Export License:</strong> EAR99</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Information</h4>
+                <p>📧 info@gamertech.uk</p>
+                <p>📧 enterprise@gamertech.uk</p>
+                <p>📞 +1 (863) 333-5888</p>
+                <p>📍 3300 Altabrook Dr, Unit 3103<br>Louisville, KY 40245, United States</p>
+                <p>🕒 Monday - Friday: 9:00 AM - 7:30 PM EST</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="#home" onclick="showPage('home')">Home</a></p>
+                <p><a href="#about" onclick="showPage('about')">About Us</a></p>
+                <p><a href="#services" onclick="showPage('services')">Services</a></p>
+                <p><a href="#portfolio" onclick="showPage('portfolio')">Portfolio</a></p>
+                <p><a href="#contact" onclick="showPage('contact')">Contact</a></p>
+                <p><a href="#" target="_blank">Privacy Policy</a></p>
+                <p><a href="#" target="_blank">Terms of Service</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Technology Partners</h4>
+                <p>Meta (Quest Pro, Quest 3)</p>
+                <p>HTC (VIVE Pro 2, VIVE Focus)</p>
+                <p>Pico Interactive (Pico 4, Neo 3)</p>
+                <p>Varjo (Aero, VR-3, Varjo Base)</p>
+                <p>Apple (Vision Pro)</p>
+                <p>Microsoft (HoloLens 2)</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GamerTech Solutions LLC. All rights reserved. | ISO 9001:2015 Certified | SOC 2 Type II Compliant</p>
+        </div>
+    </footer>
+
+    <script>
+        // Page loading animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('fade-out');
+            }, 1000);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Hamburger menu toggle
+        document.getElementById('hamburger').addEventListener('click', function() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        });
+
+        // Page switching functionality
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show target page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Close mobile menu
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Simulate form submission
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                alert('Thank you for your consultation request! Our enterprise team will contact you within 24 hours to discuss your VR solution requirements.');
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href').length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Parallax scrolling effect
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero-bg');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.service-card, .stat-card, .portfolio-item, .team-member').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = counter.textContent;
+                let current = 0;
+                
+                // Handle different number formats
+                if (target.includes('$') && target.includes('M')) {
+                    const numTarget = 50;
+                    const increment = numTarget / 50;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= numTarget) {
+                            current = numTarget;
+                            clearInterval(timer);
+                        }
+                        counter.textContent = '$' + Math.floor(current) + 'M+';
+                    }, 50);
+                } else if (target.includes('%')) {
+                    const numTarget = parseFloat(target.replace('%', ''));
+                    const increment = numTarget / 50;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= numTarget) {
+                            current = numTarget;
+                            clearInterval(timer);
+                        }
+                        counter.textContent = current.toFixed(1) + '%';
+                    }, 50);
+                } else if (target.includes('+')) {
+                    const numTarget = parseInt(target.replace('+', ''));
+                    const increment = numTarget / 50;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= numTarget) {
+                            current = numTarget;
+                            clearInterval(timer);
+                        }
+                        counter.textContent = Math.floor(current) + '+';
+                    }, 50);
+                } else {
+                    const numTarget = parseInt(target);
+                    const increment = numTarget / 50;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= numTarget) {
+                            current = numTarget;
+                            clearInterval(timer);
+                        }
+                        counter.textContent = Math.floor(current);
+                    }, 50);
+                }
+            });
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.about-stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
