@@ -809,22 +809,22 @@
             <h2 class="section-title">Why Choose GamerTech Solutions</h2>
             <div class="about-stats">
                 <div class="stat-card">
-                    <span class="stat-number">2024</span>
-                    <div class="stat-label">Established</div>
+                    <span class="stat-number">Scope</span>
+                    <div class="stat-label">Clear Milestones</div>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-number">1</span>
-                    <div class="stat-label">Sole Member</div>
+                    <span class="stat-number">MVP</span>
+                    <div class="stat-label">Rapid Prototyping</div>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-number">0</span>
-                    <div class="stat-label">Employees</div>
+                    <span class="stat-number">QA</span>
+                    <div class="stat-label">Testing &amp; Optimization</div>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-number">100%</span>
-                    <div class="stat-label">Remote Delivery</div>
+                    <span class="stat-number">Support</span>
+                    <div class="stat-label">Maintenance &amp; Updates</div>
                 </div>
-            </div>
+</div>
         </section>
 
         <!-- Core Services Preview -->
@@ -1354,7 +1354,11 @@
         function animateCounters() {
             const counters = document.querySelectorAll('.stat-number');
             counters.forEach(counter => {
-                const target = counter.textContent;
+                const target = counter.textContent.trim();
+                // If this counter is not numeric (e.g., 'MVP', 'QA'), skip animation
+                if (!/\d/.test(target)) {
+                    return;
+                }
                 let current = 0;
                 
                 // Handle different number formats
